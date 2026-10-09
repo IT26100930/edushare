@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Login')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <div class="card form-card">
+        <h2>Welcome back</h2>
+        <p class="muted">Log in to download, bookmark and review resources.</p>
+        <form th:action="@{/login}" method="post">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" required placeholder="you@example.com">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" required>
+            <button class="btn btn-primary btn-block" style="margin-top:1rem" type="submit">Login</button>
+        </form>
+        <p class="small muted" style="margin-top:1rem">
+            No account? <a th:href="@{/register}"><b>Register for free</b></a>
+        </p>
+        <div class="alert" style="background:var(--yellow);margin:1rem 0 0">
+            <b>Demo accounts</b><br>
+            <span class="small">charith@edushare.com / charith123 (free)<br>
+            premium@edushare.com / premium123 (premium)<br>
+            admin@edushare.com / admin123 (admin)</span>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

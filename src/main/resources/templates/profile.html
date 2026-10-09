@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Profile')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <div class="card">
+        <div class="row between">
+            <div>
+                <h2 th:text="${currentUser.name}">Charith</h2>
+                <span class="tag gold" th:text="${currentUser.badge}">FREE MEMBER</span>
+                <p class="muted small" style="margin-top:.6rem">
+                    <span th:text="${currentUser.email}">email</span> · joined
+                    <span th:text="${currentUser.joinedDate}">2026-01-01</span>
+                </p>
+                <p class="small" th:if="${currentUser.premium and !currentUser.admin}">
+                    Premium until <b th:text="${currentUser.premiumUntil}">2027-01-01</b>
+                </p>
+            </div>
+            <div class="row">
+                <a class="btn btn-gold" th:if="${!currentUser.premium}" th:href="@{/premium}">Upgrade to Premium</a>
+                <a class="btn" th:if="${!currentUser.admin}" th:href="@{/subscription}">Subscription</a>
+            </div>
+        </div>
+        <p class="small muted" style="margin-top:.8rem">Your watermark: <b th:text="${watermark}">EDUSHARE</b></p>
+    </div>
+
+    <div class="grid grid-4 section">
+        <div class="card stat"><b th:text="${downloadCount}">0</b><span>Downloads</span></div>
+        <div class="card stat"><b th:text="${bookmarkCount}">0</b><span>Bookmarks</span></div>
+        <div class="card stat"><b th:text="${uploadCount}">0</b><span>Shared</span></div>
+    </div>
+
+    <div class="grid grid-2 section">
+        <div class="card">
+            <h3>Edit profile</h3>
+            <form th:action="@{/profile/name}" method="post">
+                <label for="name">Display name</label>
+                <input id="name" type="text" name="name" th:value="${currentUser.name}" required>
+                <button class="btn btn-primary" style="margin-top:1rem" type="submit">Save</button>
+            </form>
+        </div>
+        <div class="card">
+            <h3>Change password</h3>
+            <form th:action="@{/profile/password}" method="post">
+                <label for="oldPassword">Current password</label>
+                <input id="oldPassword" type="password" name="oldPassword" required>
+                <label for="newPassword">New password</label>
+                <input id="newPassword" type="password" name="newPassword" required minlength="6">
+                <button class="btn btn-primary" style="margin-top:1rem" type="submit">Update password</button>
+            </form>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
