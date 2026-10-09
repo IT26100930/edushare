@@ -1,0 +1,4 @@
+# id|role|name|email|passwordHash(SHA-256)|joined|membership|premiumUntil
+u1|STUDENT|Charith|charith@edushare.com|79c4eeccba08cb52a892f85f9b30578c01154cda2b332269f672af395482e7a4|2026-08-01|FREE|
+u2|STUDENT|Nimali Perera|premium@edushare.com|29599be933750365966a0677feacbf69d48cdc64ac3c22ec1b02bc78cf3ddbde|2026-08-05|PREMIUM|2027-08-05
+u3|ADMIN|Admin|admin@edushare.com|240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9|2026-07-01||
