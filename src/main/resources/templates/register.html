@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Register')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <div class="card form-card">
+        <h2>Join EduShare</h2>
+        <p class="muted">Free membership. Upgrade to Premium any time.</p>
+        <form th:action="@{/register}" method="post">
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" required>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" required>
+            <label for="password">Password (min 6 characters)</label>
+            <input id="password" type="password" name="password" required minlength="6">
+            <label for="confirm">Confirm password</label>
+            <input id="confirm" type="password" name="confirm" required minlength="6">
+            <button class="btn btn-gold btn-block" style="margin-top:1rem" type="submit">Create free account</button>
+        </form>
+        <p class="small muted" style="margin-top:1rem">
+            Already a member? <a th:href="@{/login}"><b>Login</b></a>
+        </p>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
