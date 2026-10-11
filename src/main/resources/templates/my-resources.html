@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | My Library')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <h1 style="font-size:2.2rem">My Library</h1>
+    <div th:replace="~{fragments :: libnav('mine')}"></div>
+
+    <div class="row between" style="margin-bottom:1rem">
+        <p class="muted" style="margin:0">Resources you have shared with the community.</p>
+        <a class="btn btn-gold" th:href="@{/resources/add}">+ Share a resource</a>
+    </div>
+
+    <div class="table-wrap" th:if="${!#lists.isEmpty(resources)}">
+        <table>
+            <thead><tr><th>Title</th><th>Type</th><th>Access</th><th>Downloads</th><th>Shared</th><th></th></tr></thead>
+            <tbody>
+            <tr th:each="r : ${resources}">
+                <td><a th:href="@{/resources/{id}(id=${r.id})}" th:text="${r.title}"><b>Title</b></a></td>
+                <td th:text="${r.typeLabel}">E-BOOK</td>
+                <td th:text="${r.premium} ? 'Premium' : 'Free'">Free</td>
+                <td th:text="${r.downloads}">0</td>
+                <td th:text="${r.createdAt}">2026-01-01</td>
+                <td class="row">
+                    <a class="btn btn-small" th:href="@{/resources/{id}/edit(id=${r.id})}">Edit</a>
+                    <form th:action="@{/resources/{id}/delete(id=${r.id})}" method="post" class="inline"
+                          onsubmit="return confirm('Delete this resource?');">
+                        <button class="btn btn-small btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${#lists.isEmpty(resources)}" class="card center">
+        <h3>You have not shared anything yet</h3>
+        <p class="muted">Upload your first lecture note, e-book or past paper.</p>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

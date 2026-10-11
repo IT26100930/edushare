@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Edit Resource')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <div class="card form-card form-wide">
+        <h2>Edit resource</h2>
+        <span class="tag blue" th:text="${resource.typeLabel}">E-BOOK</span>
+        <form th:action="@{/resources/{id}/edit(id=${resource.id})}" method="post">
+            <label for="title">Title</label>
+            <input id="title" type="text" name="title" th:value="${resource.title}" required>
+
+            <label for="categoryId">Category</label>
+            <select id="categoryId" name="categoryId" required>
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"
+                        th:selected="${c.id == resource.categoryId}">Category</option>
+            </select>
+
+            <div class="grid grid-2">
+                <div>
+                    <label for="extraA" th:text="${resource.extraALabel}">Module</label>
+                    <input id="extraA" type="text" name="extraA" th:value="${resource.extraA}">
+                </div>
+                <div>
+                    <label for="extraB" th:text="${resource.extraBLabel}">Year</label>
+                    <input id="extraB" type="text" name="extraB" th:value="${resource.extraB}">
+                </div>
+            </div>
+
+            <label for="description">Short description</label>
+            <textarea id="description" name="description" style="min-height:80px" th:text="${resource.description}"></textarea>
+
+            <label for="content">Content</label>
+            <textarea id="content" name="content" style="min-height:220px" th:text="${resource.content}"></textarea>
+
+            <label th:if="${currentUser.premium}">
+                <input type="checkbox" name="premium" value="true" th:checked="${resource.premium}"> Premium-only resource
+            </label>
+
+            <div class="row" style="margin-top:1rem">
+                <button class="btn btn-primary" type="submit">Save changes</button>
+                <a class="btn" th:href="@{/resources/{id}(id=${resource.id})}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
