@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | My Library')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <h1 style="font-size:2.2rem">My Library</h1>
+    <div th:replace="~{fragments :: libnav('downloads')}"></div>
+
+    <div class="table-wrap" th:if="${!#lists.isEmpty(downloads)}">
+        <table>
+            <thead><tr><th>Resource</th><th>Downloaded</th><th></th></tr></thead>
+            <tbody>
+            <tr th:each="d : ${downloads}">
+                <td><b th:text="${d.resourceTitle}">Title</b></td>
+                <td th:text="${d.date}">2026-01-01</td>
+                <td class="row">
+                    <a class="btn btn-small" th:href="@{/resources/{id}(id=${d.resourceId})}">View</a>
+                    <a class="btn btn-small btn-teal" th:href="@{/download/{id}(id=${d.resourceId})}">Download again</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${#lists.isEmpty(downloads)}" class="card center">
+        <h3>No downloads yet</h3>
+        <p class="muted">Resources you download will show up here.</p>
+        <a class="btn btn-gold" th:href="@{/resources}">Browse resources</a>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
