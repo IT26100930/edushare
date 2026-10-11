@@ -1,0 +1,4 @@
+# id|userId|userName|title|description|status|createdAt
+q1|u1|Charith|IE1030 tutorial 3 solutions|Looking for worked answers to the subnetting tutorial.|OPEN|2026-09-26
+q2|u2|Nimali Perera|IT1140 number systems summary|Binary, octal and hex conversion practice sheets.|OPEN|2026-09-22
+q3|u1|Charith|SE1020 lab 2 sample code|Fulfilled - thank you!|FULFILLED|2026-09-05
