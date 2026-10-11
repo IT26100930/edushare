@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Share a Resource')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <div class="card form-card form-wide">
+        <h2>Share a resource</h2>
+        <p class="muted">Help other students learn. Add a summary and the study content people can read and download.</p>
+        <form th:action="@{/resources/add}" method="post">
+            <label for="type">Type</label>
+            <select id="type" name="type" onchange="updateLabels()">
+                <option value="EBOOK">E-Book</option>
+                <option value="LECTURE_NOTE">Lecture note</option>
+                <option value="PAST_PAPER">Past paper</option>
+            </select>
+
+            <label for="title">Title</label>
+            <input id="title" type="text" name="title" required>
+
+            <label for="categoryId">Category</label>
+            <select id="categoryId" name="categoryId" required>
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}">Category</option>
+            </select>
+
+            <div class="grid grid-2">
+                <div>
+                    <label for="extraA" id="labelA">Author</label>
+                    <input id="extraA" type="text" name="extraA">
+                </div>
+                <div>
+                    <label for="extraB" id="labelB">Pages</label>
+                    <input id="extraB" type="text" name="extraB">
+                </div>
+            </div>
+
+            <label for="description">Short description</label>
+            <textarea id="description" name="description" style="min-height:80px"></textarea>
+
+            <label for="content">Content (text students can read &amp; download)</label>
+            <textarea id="content" name="content" style="min-height:220px"></textarea>
+
+            <label th:if="${currentUser.premium}">
+                <input type="checkbox" name="premium" value="true"> Premium-only resource
+            </label>
+
+            <div class="row" style="margin-top:1rem">
+                <button class="btn btn-primary" type="submit">Share resource</button>
+                <a class="btn" th:href="@{/resources}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+<script>
+    function updateLabels() {
+        var t = document.getElementById('type').value;
+        var a = document.getElementById('labelA');
+        var b = document.getElementById('labelB');
+        if (t === 'EBOOK') { a.textContent = 'Author'; b.textContent = 'Pages'; }
+        if (t === 'LECTURE_NOTE') { a.textContent = 'Module'; b.textContent = 'Lecturer'; }
+        if (t === 'PAST_PAPER') { a.textContent = 'Module'; b.textContent = 'Year'; }
+    }
+</script>
+</body>
+</html>
