@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Admin Subscriptions')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <h1 style="font-size:2.2rem">Admin — Subscriptions</h1>
+    <div class="tabs">
+        <a th:href="@{/admin}">Overview</a>
+        <a th:href="@{/admin/users}">Users</a>
+        <a class="active" th:href="@{/admin/subscriptions}">Subscriptions</a>
+    </div>
+    <p class="muted">Demo revenue (not cancelled): <b>Rs. <span th:text="${revenue}">0</span></b></p>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Member</th><th>Plan</th><th>Amount</th><th>Start</th><th>End</th><th>Days left</th><th>Status</th></tr></thead>
+            <tbody>
+            <tr th:each="v : ${views}">
+                <td><b th:text="${v.subscription.userName}">Name</b></td>
+                <td th:text="${v.subscription.planLabel}">Yearly</td>
+                <td>Rs. <span th:text="${v.subscription.amount}">4999</span></td>
+                <td th:text="${v.subscription.startDate}">2026-01-01</td>
+                <td th:text="${v.subscription.endDate}">2027-01-01</td>
+                <td th:text="${v.subscription.active} ? ${v.daysLeft} : '—'">0</td>
+                <td><span class="tag" th:classappend="${v.subscription.active} ? 'green'" th:text="${v.subscription.status}">ACTIVE</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${#lists.isEmpty(views)}" class="card center section"><p class="muted">No subscriptions yet.</p></div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

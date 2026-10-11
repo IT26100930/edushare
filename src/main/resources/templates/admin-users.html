@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Admin Users')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <h1 style="font-size:2.2rem">Admin — Users</h1>
+    <div class="tabs">
+        <a th:href="@{/admin}">Overview</a>
+        <a class="active" th:href="@{/admin/users}">Users</a>
+        <a th:href="@{/admin/subscriptions}">Subscriptions</a>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Membership</th><th>Joined</th><th>Actions</th></tr></thead>
+            <tbody>
+            <tr th:each="u : ${users}">
+                <td><b th:text="${u.name}">Name</b></td>
+                <td th:text="${u.email}">email</td>
+                <td th:text="${u.role}">STUDENT</td>
+                <td><span class="tag" th:classappend="${u.premium} ? 'gold'" th:text="${u.badge}">FREE MEMBER</span></td>
+                <td th:text="${u.joinedDate}">2026-01-01</td>
+                <td class="row" th:if="${!u.admin}">
+                    <form th:action="@{/admin/users/{id}/grant(id=${u.id})}" method="post" class="inline">
+                        <button class="btn btn-small btn-gold" type="submit">Grant 1 month</button>
+                    </form>
+                    <form th:if="${u.premium}" th:action="@{/admin/users/{id}/revoke(id=${u.id})}" method="post" class="inline">
+                        <button class="btn btn-small" type="submit">Revoke</button>
+                    </form>
+                    <form th:action="@{/admin/users/{id}/delete(id=${u.id})}" method="post" class="inline"
+                          onsubmit="return confirm('Delete this user?');">
+                        <button class="btn btn-small btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+                <td th:if="${u.admin}" class="muted small">—</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

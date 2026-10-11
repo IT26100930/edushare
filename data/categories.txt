@@ -1,0 +1,7 @@
+# id|name|color
+c1|Programming|#4D96FF
+c2|Mathematics|#9B5DE5
+c3|Networking|#2EC4B6
+c4|Software Engineering|#FF9F1C
+c5|Technical Writing|#FF595E
+c6|Computing Fundamentals|#6BCB77

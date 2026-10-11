@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Checkout')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <div class="card form-card">
+        <span class="tag red">DEMO CHECKOUT</span>
+        <h2 style="margin-top:.5rem">Checkout</h2>
+        <p class="muted small">This is a demonstration. No real payment is taken and no card details are stored.</p>
+
+        <div class="alert" style="background:var(--yellow)">
+            <b>EduShare Premium — <span th:text="${planLabel}">Yearly</span></b><br>
+            Total: <b>Rs. <span th:text="${price}">4,999</span></b>
+        </div>
+
+        <label>Name on card (demo)</label>
+        <input type="text" value="Demo Student" readonly>
+        <label>Card number (demo)</label>
+        <input type="text" value="4242 4242 4242 4242" readonly>
+        <div class="grid grid-2">
+            <div><label>Expiry</label><input type="text" value="12 / 30" readonly></div>
+            <div><label>CVC</label><input type="text" value="123" readonly></div>
+        </div>
+
+        <form th:action="@{/checkout}" method="post">
+            <input type="hidden" name="plan" th:value="${plan}">
+            <button class="btn btn-gold btn-block" style="margin-top:1rem" type="submit">Pay Rs. <span th:text="${price}">4,999</span> (demo)</button>
+        </form>
+        <p class="center small" style="margin-top:.8rem"><a th:href="@{/premium}">← Back to plans</a></p>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
