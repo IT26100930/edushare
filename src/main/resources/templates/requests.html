@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Requests')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <h1 style="font-size:2.2rem">Resource requests</h1>
+    <p class="muted">Can't find what you need? Ask the community, and share if you have it.</p>
+
+    <div class="card form-wide" th:if="${currentUser != null}">
+        <h3>Request a resource</h3>
+        <form th:action="@{/requests/add}" method="post">
+            <label for="title">What are you looking for?</label>
+            <input id="title" type="text" name="title" required placeholder="e.g. IE1030 tutorial 3 solutions">
+            <label for="description">Details (optional)</label>
+            <textarea id="description" name="description" style="min-height:80px"></textarea>
+            <button class="btn btn-primary" style="margin-top:1rem" type="submit">Post request</button>
+        </form>
+    </div>
+    <div class="card" th:if="${currentUser == null}">
+        <a th:href="@{/login}"><b>Login</b></a> to post a request.
+    </div>
+
+    <div class="grid section">
+        <div th:each="r : ${requests}" class="card">
+            <div class="row between">
+                <div>
+                    <span class="tag" th:classappend="${r.open} ? 'gold' : 'green'" th:text="${r.open} ? 'OPEN' : 'FULFILLED'">OPEN</span>
+                    <h3 style="margin-top:.4rem" th:text="${r.title}">Title</h3>
+                </div>
+                <span class="small muted">by <b th:text="${r.userName}">User</b> · <span th:text="${r.createdAt}">2026-01-01</span></span>
+            </div>
+            <p th:if="${r.description != ''}" th:text="${r.description}">Details</p>
+            <div class="row" th:if="${currentUser != null and (currentUser.admin or currentUser.id == r.userId)}">
+                <form th:if="${r.open}" th:action="@{/requests/{id}/fulfil(id=${r.id})}" method="post" class="inline">
+                    <button class="btn btn-small btn-teal" type="submit">Mark fulfilled</button>
+                </form>
+                <form th:action="@{/requests/{id}/delete(id=${r.id})}" method="post" class="inline">
+                    <button class="btn btn-small btn-danger" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(requests)}" class="card center"><p class="muted">No requests yet.</p></div>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
