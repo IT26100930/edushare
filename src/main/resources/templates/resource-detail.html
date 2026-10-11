@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Resource Details')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <a th:href="@{/resources}" class="small"><b>← All resources</b></a>
+
+    <div class="card" style="margin-top:.8rem">
+        <div class="row">
+            <span class="tag blue" th:text="${resource.typeLabel}">E-BOOK</span>
+            <span class="tag gold" th:if="${resource.premium}">★ PREMIUM</span>
+            <span class="tag" th:if="${category != null}" th:text="${category.name}"
+                  th:style="'background:' + ${category.color} + ';color:#111'">Category</span>
+        </div>
+        <h1 style="font-size:2.2rem;margin-top:.6rem" th:text="${resource.title}">Title</h1>
+        <p class="muted small">
+            Shared by <b th:text="${resource.uploaderName}">Admin</b> on <span th:text="${resource.createdAt}">2026-01-01</span>
+            · ⬇ <span th:text="${resource.downloads}">0</span> downloads
+            · <span th:text="${avgRating}">0.0</span> ★ (<span th:text="${#lists.size(reviews)}">0</span> reviews)
+        </p>
+        <p class="small">
+            <b th:text="${resource.extraALabel}">Module</b>: <span th:text="${resource.extraA}">IT1120</span> ·
+            <b th:text="${resource.extraBLabel}">Year</b>: <span th:text="${resource.extraB}">2025</span>
+        </p>
+        <p th:text="${resource.description}">Description</p>
+
+        <div class="row">
+            <a th:if="${canAccess and currentUser != null}" class="btn btn-teal" th:href="@{/download/{id}(id=${resource.id})}">⬇ Download</a>
+            <a th:if="${canAccess and currentUser == null}" class="btn btn-teal" th:href="@{/login}">Login to download</a>
+            <a th:if="${!canAccess}" class="btn btn-gold" th:href="@{/premium}">🔒 Upgrade to unlock</a>
+            <form th:if="${currentUser != null}" th:action="@{/bookmarks/toggle/{id}(id=${resource.id})}" method="post" class="inline">
+                <button class="btn" type="submit" th:text="${bookmarked} ? '★ Bookmarked' : '☆ Bookmark'">☆ Bookmark</button>
+            </form>
+            <a th:if="${canEdit}" class="btn" th:href="@{/resources/{id}/edit(id=${resource.id})}">Edit</a>
+            <form th:if="${canEdit}" th:action="@{/resources/{id}/delete(id=${resource.id})}" method="post" class="inline"
+                  onsubmit="return confirm('Delete this resource?');">
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <section class="section">
+        <h2>Watch &amp; Read preview</h2>
+        <div th:if="${canAccess}" class="preview">
+            <pre th:text="${resource.content}">Content</pre>
+            <div class="watermark-layer" th:attr="data-wm=${watermark}"></div>
+        </div>
+        <div th:if="${!canAccess}" class="locked-box">
+            <div class="blur"><pre style="white-space:pre-wrap" th:text="${lockedPreview}">preview</pre></div>
+            <div class="overlay">
+                <h3>🔒 Premium resource</h3>
+                <p>Upgrade to EduShare Premium to read and download the full resource.</p>
+                <a class="btn" th:href="@{/premium}">See Premium</a>
+            </div>
+        </div>
+        <p class="small muted" th:if="${canAccess}">Preview is watermarked: <b th:text="${watermark}">EDUSHARE</b></p>
+    </section>
+
+    <section class="section">
+        <h2>Reviews</h2>
+        <div class="card">
+            <div th:each="r : ${reviews}" class="review">
+                <div class="row">
+                    <b th:text="${r.userName}">User</b>
+                    <span class="stars" th:text="${r.stars}">★★★★★</span>
+                    <span class="tag" th:classappend="${r.kind == 'VERIFIED'} ? 'green'" th:text="${r.kindLabel}">MEMBER REVIEW</span>
+                    <span class="small muted" th:text="${r.date}">2026-01-01</span>
+                </div>
+                <p style="margin:.3rem 0 0" th:text="${r.comment}">Comment</p>
+            </div>
+            <p th:if="${#lists.isEmpty(reviews)}" class="muted">No reviews yet.</p>
+
+            <form th:if="${currentUser != null}" th:action="@{/reviews/add}" method="post" style="margin-top:1rem">
+                <input type="hidden" name="resourceId" th:value="${resource.id}">
+                <label for="rating">Your rating</label>
+                <select id="rating" name="rating">
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Good</option>
+                    <option value="3">3 - Okay</option>
+                    <option value="2">2 - Poor</option>
+                    <option value="1">1 - Bad</option>
+                </select>
+                <label for="comment">Comment</label>
+                <textarea id="comment" name="comment" required placeholder="How did this resource help you?"></textarea>
+                <p class="small muted" th:if="${!downloaded}">Download this resource first to post a verified review.</p>
+                <button class="btn btn-primary" type="submit">Post review</button>
+            </form>
+            <p th:if="${currentUser == null}" class="small">
+                <a th:href="@{/login}"><b>Login</b></a> to write a review.
+            </p>
+        </div>
+    </section>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
