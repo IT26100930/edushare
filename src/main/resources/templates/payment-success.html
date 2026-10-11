@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Payment Success')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <div class="card form-card center">
+        <div style="font-size:3rem">🎉</div>
+        <h2>Welcome to EduShare Premium!</h2>
+        <p class="muted">Your demo payment was successful. The whole library is now unlocked.</p>
+        <table style="margin:1rem 0;text-align:left">
+            <tr><th>Plan</th><td th:text="${sub.planLabel}">Yearly</td></tr>
+            <tr><th>Amount</th><td>Rs. <span th:text="${sub.amount}">4999</span></td></tr>
+            <tr><th>Valid until</th><td th:text="${sub.endDate}">2027-01-01</td></tr>
+            <tr><th>Reference</th><td th:text="${sub.id}">s123</td></tr>
+        </table>
+        <div class="row" style="justify-content:center">
+            <a class="btn btn-gold" th:href="@{/resources(access='premium')}">Explore Premium</a>
+            <a class="btn" th:href="@{/subscription}">My subscription</a>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Subscription')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <h1 style="font-size:2.2rem">My subscription</h1>
+
+    <div class="card" th:if="${active != null}">
+        <span class="tag gold">EDUSHARE PREMIUM</span>
+        <h3 style="margin-top:.5rem"><span th:text="${active.planLabel}">Yearly</span> plan — Rs. <span th:text="${active.amount}">4999</span></h3>
+        <p class="muted">Started <span th:text="${active.startDate}">2026-01-01</span> · renews/ends
+            <b th:text="${active.endDate}">2027-01-01</b></p>
+        <form th:action="@{/subscription/cancel}" method="post" onsubmit="return confirm('Cancel Premium? Access ends immediately in this demo.');">
+            <button class="btn btn-danger" type="submit">Cancel subscription</button>
+        </form>
+    </div>
+    <div class="card center" th:if="${active == null}">
+        <h3>You are on the free plan</h3>
+        <p class="muted">Upgrade to unlock every Premium resource.</p>
+        <a class="btn btn-gold" th:href="@{/premium}">Upgrade to Premium</a>
+    </div>
+
+    <section class="section" th:if="${!#lists.isEmpty(history)}">
+        <h2>History</h2>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Plan</th><th>Amount</th><th>Start</th><th>End</th><th>Status</th></tr></thead>
+                <tbody>
+                <tr th:each="s : ${history}">
+                    <td th:text="${s.planLabel}">Yearly</td>
+                    <td>Rs. <span th:text="${s.amount}">4999</span></td>
+                    <td th:text="${s.startDate}">2026-01-01</td>
+                    <td th:text="${s.endDate}">2027-01-01</td>
+                    <td><span class="tag" th:classappend="${s.active} ? 'green'" th:text="${s.status}">ACTIVE</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

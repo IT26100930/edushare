@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Premium')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <section class="premium-hero">
+        <div class="kicker">EDUSHARE PREMIUM</div>
+        <h2>Unlock the complete learning library.</h2>
+        <p style="color:#fff;font-size:1.1rem">Everything you need to learn,<br>share and succeed.</p>
+        <p style="font-size:1.4rem;font-weight:800">Rs. 499 / month<br>Rs. 4,999 / year</p>
+        <a class="btn btn-gold" th:href="@{/checkout(plan='YEARLY')}">Upgrade to Premium</a>
+    </section>
+
+    <section class="section grid grid-2">
+        <div class="card plan">
+            <span class="tag">MONTHLY</span>
+            <div class="price">Rs. 499</div>
+            <p class="muted">per month</p>
+            <ul class="perks">
+                <li>All Premium resources</li>
+                <li>Watermarked previews &amp; downloads</li>
+                <li>Mark your own uploads Premium</li>
+                <li>Cancel any time</li>
+            </ul>
+            <a class="btn btn-block" th:if="${currentUser == null or !currentUser.premium}" th:href="@{/checkout(plan='MONTHLY')}">Choose monthly</a>
+        </div>
+        <div class="card plan featured">
+            <span class="tag gold">BEST VALUE</span>
+            <div class="price">Rs. 4,999</div>
+            <p>per year</p>
+            <ul class="perks">
+                <li>Everything in Monthly</li>
+                <li>Two months free</li>
+                <li>One simple yearly payment</li>
+                <li>Cancel any time</li>
+            </ul>
+            <a class="btn btn-block btn-primary" th:if="${currentUser == null or !currentUser.premium}" th:href="@{/checkout(plan='YEARLY')}">Choose yearly</a>
+        </div>
+    </section>
+
+    <section class="section card center" th:if="${currentUser != null and currentUser.premium}">
+        <h3>You already have full access ✨</h3>
+        <p class="muted">Thanks for supporting EduShare.</p>
+        <a class="btn" th:if="${!currentUser.admin}" th:href="@{/subscription}">Manage subscription</a>
+    </section>
+
+    <section class="section">
+        <h2>Free vs Premium</h2>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Feature</th><th>Free</th><th>Premium</th></tr></thead>
+                <tbody>
+                <tr><td>Browse &amp; search resources</td><td>✔</td><td>✔</td></tr>
+                <tr><td>Free resources: download, bookmark, review</td><td>✔</td><td>✔</td></tr>
+                <tr><td>Watch &amp; Read links, requests</td><td>✔</td><td>✔</td></tr>
+                <tr><td>Premium resources</td><td>🔒</td><td>✔</td></tr>
+                <tr><td>Publish Premium-only resources</td><td>—</td><td>✔</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
