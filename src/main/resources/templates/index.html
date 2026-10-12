@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Home')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+
+<main class="container">
+    <section class="hero">
+        <div class="eyebrow">E-Resource Sharing Platform</div>
+        <h1>EduShare</h1>
+        <div class="tagline">Share. Learn. Unlock More.</div>
+        <p style="max-width:640px">
+            A modern educational resource-sharing platform where students can discover, share, review,
+            bookmark, watch, read and download academic resources.
+        </p>
+        <form class="search-bar" th:action="@{/resources}" method="get">
+            <input type="text" name="q" placeholder="Search e-books, lecture notes, past papers...">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <div class="row" style="margin-top:1rem">
+            <a class="btn btn-gold" th:href="@{/resources}">Browse resources</a>
+            <a class="btn" th:href="@{/resources/add}">+ Share a resource</a>
+            <a class="btn" th:if="${currentUser == null}" th:href="@{/register}">Join free</a>
+        </div>
+    </section>
+
+    <section class="section grid grid-4">
+        <div class="card stat"><b th:text="${resourceTotal}">0</b><span>Resources</span></div>
+        <div class="card stat"><b th:text="${categoryTotal}">0</b><span>Categories</span></div>
+        <div class="card stat"><b th:text="${memberTotal}">0</b><span>Members</span></div>
+    </section>
+
+    <section class="section">
+        <div class="section-head">
+            <h2>Browse by category</h2>
+            <a class="btn btn-small" th:href="@{/categories}">All categories</a>
+        </div>
+        <div class="grid grid-4">
+            <a th:each="cc : ${categoryCounts}" class="card cat-card"
+               th:href="@{/resources(category=${cc.category.id})}"
+               th:style="'background:' + ${cc.category.color}">
+                <h3 th:text="${cc.category.name}">Category</h3>
+                <div class="count" th:text="${cc.count}">0</div>
+                <span class="small">resources</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-head">
+            <h2>Latest resources</h2>
+            <a class="btn btn-small" th:href="@{/resources}">See all</a>
+        </div>
+        <div class="grid grid-3">
+            <th:block th:each="c : ${latest}">
+                <div th:replace="~{fragments :: card(${c})}"></div>
+            </th:block>
+        </div>
+        <p th:if="${#lists.isEmpty(latest)}" class="muted">No resources yet. Be the first to share one!</p>
+    </section>
+
+    <section class="section">
+        <div class="premium-hero">
+            <div class="kicker">EDUSHARE PREMIUM</div>
+            <h2>Unlock the complete learning library.</h2>
+            <p style="color:#fff;font-size:1.1rem">Everything you need to learn,<br>share and succeed.</p>
+            <p style="font-size:1.4rem;font-weight:800">Rs. 499 / month<br>Rs. 4,999 / year</p>
+            <a class="btn btn-gold" th:href="@{/premium}">Upgrade to Premium</a>
+        </div>
+    </section>
+
+    <section class="section" th:if="${!#lists.isEmpty(premiumCards)}">
+        <div class="section-head"><h2>Inside Premium</h2></div>
+        <div class="grid grid-3">
+            <th:block th:each="c : ${premiumCards}">
+                <div th:replace="~{fragments :: card(${c})}"></div>
+            </th:block>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

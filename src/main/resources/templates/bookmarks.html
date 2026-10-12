@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | My Library')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <h1 style="font-size:2.2rem">My Library</h1>
+    <div th:replace="~{fragments :: libnav('bookmarks')}"></div>
+
+    <div class="grid grid-3">
+        <th:block th:each="c : ${cards}">
+            <div th:replace="~{fragments :: card(${c})}"></div>
+        </th:block>
+    </div>
+    <div th:if="${#lists.isEmpty(cards)}" class="card center">
+        <h3>No bookmarks yet</h3>
+        <p class="muted">Tap “☆ Save” on any resource to keep it here.</p>
+        <a class="btn btn-gold" th:href="@{/resources}">Browse resources</a>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

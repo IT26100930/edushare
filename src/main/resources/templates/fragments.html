@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}">EduShare</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/theme.js}"></script>
+</head>
+<body>
+
+<!-- NAVBAR + FLASH MESSAGES -->
+<div th:fragment="navbar">
+    <header class="navbar">
+        <div class="nav-inner">
+            <a class="brand" th:href="@{/}">
+                <span class="brand-name">EduShare</span>
+                <span class="brand-tag">Share. Learn. Unlock More.</span>
+            </a>
+            <nav class="nav-links">
+                <a th:href="@{/resources}">Resources</a>
+                <a th:href="@{/categories}">Categories</a>
+                <a th:href="@{/links}">Watch &amp; Read</a>
+                <a th:href="@{/requests}">Requests</a>
+                <a th:href="@{/my-downloads}">My Library</a>
+                <a th:href="@{/premium}">Premium</a>
+                <a th:if="${currentUser != null and currentUser.admin}" th:href="@{/admin}">Admin</a>
+            </nav>
+            <div class="nav-right">
+                <button type="button" id="themeBtn" class="btn theme-btn" onclick="toggleTheme()" title="Toggle dark mode">☾</button>
+                <a th:if="${currentUser == null}" class="btn btn-small" th:href="@{/login}">Login</a>
+                <a th:if="${currentUser == null}" class="btn btn-small btn-primary" th:href="@{/register}">Register</a>
+                <a th:if="${currentUser != null}" th:href="@{/profile}"
+                   th:classappend="${currentUser.admin} ? 'admin' : (${currentUser.premium} ? 'premium' : '')"
+                   class="user-chip">
+                    <b th:text="${currentUser.name}">Charith</b>
+                    <span th:text="${currentUser.badge}">FREE MEMBER</span>
+                </a>
+                <form th:if="${currentUser != null}" th:action="@{/logout}" method="post" class="inline">
+                    <button type="submit" class="btn btn-small">Logout</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <div class="flash-wrap">
+        <div th:if="${msg != null}" class="alert ok" th:text="${msg}"></div>
+        <div th:if="${error != null}" class="alert err" th:text="${error}"></div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer th:fragment="footer" class="footer">
+    <div class="container">
+        <span><b>EduShare</b> — Share. Learn. Unlock More.</span>
+        <span class="muted small">SE1020 Object Oriented Programming project</span>
+    </div>
+</footer>
+
+<!-- MY LIBRARY TABS -->
+<div th:fragment="libnav(active)" class="tabs">
+    <a th:href="@{/my-downloads}" th:classappend="${active == 'downloads'} ? 'active'">My Downloads</a>
+    <a th:href="@{/bookmarks}" th:classappend="${active == 'bookmarks'} ? 'active'">Bookmarks</a>
+    <a th:href="@{/my-resources}" th:classappend="${active == 'mine'} ? 'active'">My Resources</a>
+    <a th:href="@{/reviews}" th:classappend="${active == 'reviews'} ? 'active'">Reviews</a>
+</div>
+
+<!-- RESOURCE CARD -->
+<article th:fragment="card(c)" class="card resource-card">
+    <div class="card-top" th:style="'background:' + ${c.categoryColor}">
+        <span class="tag" th:text="${c.resource.typeLabel}">E-BOOK</span>
+        <span th:if="${c.resource.premium}" class="tag gold">★ PREMIUM</span>
+    </div>
+    <div class="card-body">
+        <span class="small muted" th:text="${c.categoryName}">Category</span>
+        <h3><a th:href="@{/resources/{id}(id=${c.resource.id})}" th:text="${c.resource.title}">Title</a></h3>
+        <p class="small muted" th:text="${#strings.abbreviate(c.resource.description, 110)}">Description</p>
+        <p class="small">
+            <b th:text="${c.resource.extraALabel}">Module</b>: <span th:text="${c.resource.extraA}">IT1120</span>
+            · <b th:text="${c.resource.extraBLabel}">Year</b>: <span th:text="${c.resource.extraB}">2025</span>
+        </p>
+        <div class="card-foot">
+            <span class="small"><span th:text="${c.ratingText}">4.5 ★</span> · ⬇ <span th:text="${c.resource.downloads}">0</span></span>
+            <span class="row">
+                <span th:if="${c.locked}" class="lock small">🔒 Premium</span>
+                <form th:if="${currentUser != null}" th:action="@{/bookmarks/toggle/{id}(id=${c.resource.id})}" method="post" class="inline">
+                    <button type="submit" class="btn btn-small" th:text="${c.bookmarked} ? '★ Saved' : '☆ Save'">☆ Save</button>
+                </form>
+            </span>
+        </div>
+    </div>
+</article>
+
+</body>
+</html>

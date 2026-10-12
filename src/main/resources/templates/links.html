@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Watch and Read')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <h1 style="font-size:2.2rem">Watch &amp; Read</h1>
+    <p class="muted">Free videos and articles picked by the community.</p>
+
+    <div class="tabs">
+        <a th:href="@{/links}" th:classappend="${selKind == ''} ? 'active'">All</a>
+        <a th:href="@{/links(kind='VIDEO')}" th:classappend="${selKind == 'VIDEO'} ? 'active'">▶ Watch</a>
+        <a th:href="@{/links(kind='ARTICLE')}" th:classappend="${selKind == 'ARTICLE'} ? 'active'">📖 Read</a>
+    </div>
+
+    <div class="grid grid-3">
+        <div th:each="l : ${links}" class="card">
+            <span class="tag" th:classappend="${l.kind == 'VIDEO'} ? 'red' : 'blue'" th:text="${l.kindLabel}">WATCH</span>
+            <h3 style="margin-top:.5rem"><a th:href="${l.url}" target="_blank" rel="noopener" th:text="${l.title}">Title</a></h3>
+            <p class="small muted" th:text="${l.description}">Description</p>
+            <p class="small" th:if="${l.extra != ''}"><b th:text="${l.extraLabel}">Source</b>: <span th:text="${l.extra}">x</span></p>
+            <div class="row between">
+                <span class="small muted">added by <span th:text="${l.addedByName}">User</span></span>
+                <form th:if="${currentUser != null and (currentUser.admin or currentUser.id == l.addedBy)}"
+                      th:action="@{/links/{id}/delete(id=${l.id})}" method="post" class="inline">
+                    <button class="btn btn-small btn-danger" type="submit">Remove</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:if="${#lists.isEmpty(links)}" class="card center"><p class="muted">Nothing here yet.</p></div>
+
+    <div class="card form-card form-wide section" th:if="${currentUser != null}">
+        <h3>Add a link</h3>
+        <form th:action="@{/links/add}" method="post">
+            <label for="kind">Type</label>
+            <select id="kind" name="kind">
+                <option value="VIDEO">Video (watch)</option>
+                <option value="ARTICLE">Article (read)</option>
+            </select>
+            <label for="title">Title</label>
+            <input id="title" type="text" name="title" required>
+            <label for="url">URL</label>
+            <input id="url" type="url" name="url" required placeholder="https://...">
+            <label for="extra">Duration (video) or Source (article)</label>
+            <input id="extra" type="text" name="extra">
+            <label for="description">Why is it useful?</label>
+            <textarea id="description" name="description" style="min-height:80px"></textarea>
+            <button class="btn btn-primary" style="margin-top:1rem" type="submit">Add link</button>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
