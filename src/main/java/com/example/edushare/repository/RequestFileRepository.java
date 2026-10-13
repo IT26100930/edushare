@@ -1,4 +1,4 @@
-BookmarkFileRepositorypackage com.example.edushare.repository;
+package com.example.edushare.repository;
 
 import com.example.edushare.model.ResourceRequest;
 import com.example.edushare.util.FileUtil;
