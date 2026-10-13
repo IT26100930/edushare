@@ -1,0 +1,4 @@
+# id|kind|resourceId|userId|userName|rating|comment|date
+v1|VERIFIED|r2|u1|Charith|5|Clear summary of the four pillars. Perfect for the midterm.|2026-09-20
+v2|VERIFIED|r3|u2|Nimali Perera|4|Good notes on dynamic dispatch.|2026-09-23
+v3|PUBLIC|r1|u2|Nimali Perera|5|Great starter book for Java.|2026-09-24
