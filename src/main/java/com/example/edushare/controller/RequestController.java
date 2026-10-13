@@ -1,4 +1,4 @@
-BookmarkControllerpackage com.example.edushare.controller;
+package com.example.edushare.controller;
 
 import com.example.edushare.model.User;
 import com.example.edushare.service.RequestService;
