@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Reviews')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <h1 style="font-size:2.2rem">Community reviews</h1>
+    <th:block th:if="${currentUser != null}">
+        <div th:replace="~{fragments :: libnav('reviews')}"></div>
+    </th:block>
+
+    <div class="grid">
+        <div th:each="r : ${reviews}" class="card">
+            <div class="row between">
+                <a th:href="@{/resources/{id}(id=${r.resourceId})}"><b th:text="${titles.get(r.resourceId) != null} ? ${titles.get(r.resourceId)} : 'Removed resource'">Resource</b></a>
+                <span class="tag" th:classappend="${r.kind == 'VERIFIED'} ? 'green'" th:text="${r.kindLabel}">MEMBER REVIEW</span>
+            </div>
+            <div class="row">
+                <span class="stars" th:text="${r.stars}">★★★★★</span>
+                <span class="small muted">by <b th:text="${r.userName}">User</b> · <span th:text="${r.date}">2026-01-01</span></span>
+            </div>
+            <p style="margin:.4rem 0 0" th:text="${r.comment}">Comment</p>
+            <form th:if="${currentUser != null and currentUser.admin}" th:action="@{/reviews/{id}/delete(id=${r.id})}" method="post" style="margin-top:.6rem">
+                <button class="btn btn-small btn-danger" type="submit">Delete review</button>
+            </form>
+        </div>
+        <div th:if="${#lists.isEmpty(reviews)}" class="card center"><p class="muted">No reviews yet.</p></div>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
