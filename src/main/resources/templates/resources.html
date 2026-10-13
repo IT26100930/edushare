@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('EduShare | Resources')}"></head>
+<body>
+<div th:replace="~{fragments :: navbar}"></div>
+<main class="container">
+    <div class="section-head">
+        <h1 style="font-size:2.2rem">Resources</h1>
+        <a class="btn btn-gold" th:href="@{/resources/add}">+ Share a resource</a>
+    </div>
+
+    <form class="card filters" th:action="@{/resources}" method="get">
+        <div>
+            <label for="q">Search</label>
+            <input id="q" type="text" name="q" th:value="${q}" placeholder="Title, module, author...">
+        </div>
+        <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+                <option value="">All</option>
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"
+                        th:selected="${c.id == selCategory}">Cat</option>
+            </select>
+        </div>
+        <div>
+            <label for="type">Type</label>
+            <select id="type" name="type">
+                <option value="">All</option>
+                <option value="EBOOK" th:selected="${selType == 'EBOOK'}">E-books</option>
+                <option value="LECTURE_NOTE" th:selected="${selType == 'LECTURE_NOTE'}">Lecture notes</option>
+                <option value="PAST_PAPER" th:selected="${selType == 'PAST_PAPER'}">Past papers</option>
+            </select>
+        </div>
+        <div>
+            <label for="access">Access</label>
+            <select id="access" name="access">
+                <option value="all">All</option>
+                <option value="free" th:selected="${selAccess == 'free'}">Free</option>
+                <option value="premium" th:selected="${selAccess == 'premium'}">Premium</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Filter</button>
+    </form>
+
+    <div class="grid grid-3 section">
+        <th:block th:each="c : ${cards}">
+            <div th:replace="~{fragments :: card(${c})}"></div>
+        </th:block>
+    </div>
+    <div th:if="${#lists.isEmpty(cards)}" class="card center section">
+        <h3>No resources found</h3>
+        <p class="muted">Try a different search, or <a th:href="@{/requests}"><b>request a resource</b></a>.</p>
+    </div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
