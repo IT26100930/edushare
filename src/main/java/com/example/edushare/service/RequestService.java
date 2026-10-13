@@ -1,4 +1,4 @@
-BookmarkServicepackage com.example.edushare.service;
+package com.example.edushare.service;
 
 import com.example.edushare.model.ResourceRequest;
 import com.example.edushare.model.User;
