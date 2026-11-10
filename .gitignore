@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+target/
+.idea/
+.vscode/
+coverage/
+*.log
+.DS_Store
+.env*
+!.env.example
+/data/
+/docs/
+*.class
+*.jar
+*.zip
