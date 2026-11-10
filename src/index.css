@@ -1,0 +1,255 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --font-sans: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-brand-orange: #FF4A00;
+  --color-brand-amber: #FFB31F;
+  --color-brand-blue: #1E6FEB;
+  --color-brand-navy: #263577;
+  --color-brand-peach: #FDE7E0;
+  --color-brand-ink: #111111;
+  --color-brand-muted: #555555;
+  --color-brand-line: #E8E2D6;
+  --color-brand-cream: #FFF6E5;
+}
+
+:root {
+  --bg-page: #EAF0F9;
+  --bg-canvas: #FFF9EF;
+  --color-ink: #111111;
+  --color-muted: #53627A;
+  --color-line: #E8E2D6;
+  --color-orange: #FF4A00;
+  --color-amber: #FFB31F;
+  --color-blue: #1E6FEB;
+  --color-navy: #263577;
+  --color-peach: #FDE7E0;
+  color-scheme: light;
+}
+
+.dark {
+  --bg-page: #0E1015;
+  --bg-canvas: #151821;
+  --color-ink: #F3F4F6;
+  --color-muted: #9CA3AF;
+  --color-line: #282C37;
+  --color-orange: #FF5A14;
+  --color-amber: #FFB31F;
+  --color-blue: #2E7DF7;
+  --color-navy: #222E60;
+  --color-peach: #2A1F1D;
+  color-scheme: dark;
+}
+
+html {
+  font-size: 17px;
+  scroll-behavior: smooth;
+  font-family: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-page);
+  color: var(--color-ink);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Typography tokens requested */
+.h1-headline {
+  font-size: clamp(60px, 8.8vw, 112px);
+  font-weight: 600;
+  line-height: 0.90;
+  letter-spacing: -0.045em;
+}
+
+.h2-headline {
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.4);
+}
+
+/* Reduced motion adjustments */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -------------------------------------------------------------
+   EduShare global readability scale
+   Keeps layout/spacing intact while making website typography larger.
+   ------------------------------------------------------------- */
+@layer utilities {
+  .text-xs { font-size: 0.875rem !important; line-height: 1.35rem !important; }
+  .text-sm { font-size: 1rem !important; line-height: 1.5rem !important; }
+  .text-base { font-size: 1.125rem !important; line-height: 1.7rem !important; }
+  .text-lg { font-size: 1.3rem !important; line-height: 1.85rem !important; }
+  .text-xl { font-size: 1.55rem !important; line-height: 2rem !important; }
+  .text-2xl { font-size: 1.85rem !important; line-height: 2.15rem !important; }
+  .text-3xl { font-size: 2.25rem !important; line-height: 2.5rem !important; }
+  .text-4xl { font-size: 2.8rem !important; line-height: 3rem !important; }
+  .text-5xl { font-size: 3.5rem !important; line-height: 3.7rem !important; }
+  .text-6xl { font-size: 4.25rem !important; line-height: 4.35rem !important; }
+}
+
+/* The design uses a lot of tiny arbitrary labels. Raise only their type size,
+   not padding/margins, so cards and grids do not become oversized. */
+[class*="text-[10px]"] { font-size: 0.78rem !important; line-height: 1.15rem !important; }
+[class*="text-[11px]"] { font-size: 0.84rem !important; line-height: 1.2rem !important; }
+[class*="text-[14px]"] { font-size: 1rem !important; line-height: 1.45rem !important; }
+[class*="text-[15px]"] { font-size: 1.08rem !important; line-height: 1.55rem !important; }
+[class*="text-[22px]"] { font-size: 1.65rem !important; line-height: 2rem !important; }
+[class*="text-[24px]"] { font-size: 1.8rem !important; line-height: 2.1rem !important; }
+
+/* Main non-Tailwind body copy */
+body {
+  font-size: 16.5px;
+  line-height: 1.6;
+}
+
+/* Keep the AI Studio hero especially strong. */
+.h1-headline {
+  font-size: clamp(68px, 9.4vw, 124px);
+}
+
+.h2-headline {
+  font-size: clamp(34px, 5.4vw, 54px);
+}
+
+/* 2026-11: larger, full-screen landing hero inspired by the original AI Studio composition. */
+@media (min-width: 1024px) {
+  #hero .h1-headline {
+    font-size: clamp(82px, 7.2vw, 132px);
+    line-height: 0.86;
+    letter-spacing: -0.05em;
+  }
+}
+
+/* Softer study canvas, with the existing orange / navy brand palette. */
+.portal-shell .site-canvas {
+  background: linear-gradient(145deg,#eef1f8 0%,#f7f3eb 55%,#f1f4fa 100%);
+}
+.dark .portal-shell .site-canvas {background:linear-gradient(145deg,#141925,#191d29 55%,#151821);}
+.portal-hero {
+  background:linear-gradient(125deg,#25345f,#304573);
+  color:#fff;
+  border:1px solid #40538e;
+  border-radius:28px;
+  box-shadow:0 12px 28px -24px rgba(26,41,91,.38);
+}
+.portal-hero .portal-hero-copy>h1,.portal-hero.portal-hero-copy>h1 {color:#fff;}
+.portal-hero .portal-hero-copy>p,.portal-hero.portal-hero-copy>p,.portal-hero-hint {color:#e0e7ff;}
+.portal-hero .portal-hero-copy>p:first-child {color:#ffd08b;}
+.portal-hero h1 {text-wrap:balance;}
+.portal-hero-copy>p {line-height:1.7;}
+.community-hero {margin:1.5rem auto 0;width:calc(100% - 2rem);max-width:1540px;}
+.portal-page :where(article.bg-white,section.bg-white,div.bg-white) {background-color:#fffdf9;}
+.dark .portal-page :where(article.bg-white,section.bg-white,div.bg-white) {background-color:#1b202c;}
+.resource-results {scroll-margin-top:7rem;outline:none;}
+.resource-results:focus-visible {outline:2px solid #263577;outline-offset:8px;border-radius:16px;}
+.site-shell :where(.text-\[10px\]) {font-size:.72rem;line-height:1.45;}
+.site-shell :where(.text-\[11px\]) {font-size:.78rem;line-height:1.45;}
+.site-shell :where(input,textarea,select) {line-height:1.5;}
+.site-shell :where(a,button):focus-visible {outline:2px solid #657fb6;outline-offset:3px;}
+.home-hero {min-height:620px;}
+.home-hero-grid {max-width:1720px;margin-inline:auto;}
+.hero-orbit {width:clamp(560px,61vw,1140px);height:clamp(560px,61vw,1140px);left:clamp(-240px,-9vw,-80px);top:-260px;}
+.home-hero-art {transform-origin:left center;}
+.home-hero-copy h1 {text-wrap:balance;}
+@media(min-width:1100px){.home-hero-art{width:109%;max-width:none;margin-left:-5%;}.home-hero{padding-left:1rem;padding-right:clamp(2rem,4vw,6rem);}}
+@media(min-width:1800px){.hero-orbit{left:-100px;top:-340px;}.home-hero{min-height:760px;}}
+@media(max-width:640px){html{font-size:16.5px;}.portal-hero{border-radius:22px;}.community-hero{width:calc(100% - 1rem);}.home-hero{padding-top:2rem;}.hero-orbit{left:-200px;top:-140px;width:640px;height:640px;}.home-hero-copy h1{font-size:clamp(2.7rem,10vw,3.6rem);}}
+
+.portal-stat {color:#1d285e;}
+.dark .portal-stat {color:#eef2ff;}
+.portal-hero :where(input,select,textarea) {color:#192441;}
+.dark .portal-hero :where(input,select,textarea) {color:#f3f4f6;}
+.portal-hero a[href="#study-circles"] {border:1px solid rgba(255,255,255,.35);}
+
+.portal-page .text-neutral-400 {color:#69778d;}
+.dark .portal-page .text-neutral-400 {color:#aebbd0;}
+
+/* A focused field lifts gently, using one blue focus treatment across the site. */
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),textarea,select) {
+  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),textarea,select):focus {
+  outline:none;outline-offset:0;border-color:#8095bf;
+  --tw-ring-shadow:0 0 #0000;--tw-ring-offset-shadow:0 0 #0000;
+  box-shadow:0 0 0 4px rgba(104,132,187,.15),0 8px 18px -15px rgba(29,47,86,.48);
+  transform:translateY(-1px);
+}
+.dark :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),textarea,select):focus {border-color:#93a9d4;box-shadow:0 0 0 4px rgba(134,164,222,.16),0 8px 18px -15px rgba(0,0,0,.5);}
+:where(input,textarea,select)[aria-invalid="true"]:focus {border-color:#dc6464;box-shadow:0 0 0 4px rgba(200,70,70,.12);}
+.catalog-search-field {border-color:#d8dfed;box-shadow:0 4px 14px -10px rgba(24,37,70,.4);transition:box-shadow .16s,border-color .16s,transform .16s;}
+.catalog-search-field:focus-within {border-color:#91a5cc;box-shadow:0 0 0 4px rgba(168,190,234,.17),0 10px 24px -18px rgba(12,25,54,.65);transform:translateY(-1px);}
+input.catalog-search-input:focus {outline:none;border:0;box-shadow:none;transform:none;}
+input.catalog-search-input::-webkit-search-cancel-button {appearance:none;}
+.catalog-search-popover {color:#172447;box-shadow:0 18px 36px -18px rgba(12,25,55,.55);}
+.catalog-feedback {background:rgba(255,255,255,.075);border:1px solid rgba(225,233,255,.16);color:#e7efff;}
+.catalog-intro {position:relative;z-index:10;}
+@media(prefers-reduced-motion:reduce){:where(input,textarea,select):focus,.catalog-search-field:focus-within{transform:none;}}
+
+.catalog-result-meta,.catalog-feedback {overflow-wrap:anywhere;}
+.catalog-feedback>div {min-width:0;}
+
+/* Light mode: a blue study canvas with warm paper surfaces and darker small text. */
+:root:not(.dark) :is(.site-shell,.admin-shell) {background-color:#edf2fa;}
+:root:not(.dark) .site-shell .site-canvas {background:linear-gradient(135deg,#e8eef9 0%,#f6efdf 55%,#eaf1f8 100%);}
+:root:not(.dark) :is(.site-shell,.admin-shell) :where(article,section,div).bg-white {background-color:#fff9ef;}
+:root:not(.dark) :is(.site-shell,.admin-shell) :where(article,section,div).bg-neutral-50 {background-color:#edf2fa;}
+:root:not(.dark) [role="dialog"] .text-neutral-400 {color:#5b6c84;}
+:root:not(.dark) [role="dialog"] .text-neutral-500 {color:#53627a;}
+:root:not(.dark) [role="dialog"] .text-neutral-600 {color:#40516b;}
+:root:not(.dark) :is(.site-shell,.admin-shell) [class~="border-[#E8E2D6]"] {border-color:#d4ddeb;}
+.plan-match-result {background:#e6edff;border-color:#8ba4d6;color:#1e356a;box-shadow:0 12px 30px -22px #334b85;}
+.dark .plan-match-result {background:#202d48;border-color:#607bb0;color:#e2ebff;}
+.profile-stat {background:var(--stat-bg);border-color:var(--stat-line);box-shadow:0 5px 16px -13px #233b64;transition:transform .16s,box-shadow .16s,border-color .16s;}
+.profile-stat-uploads {--stat-bg:#e6edff;--stat-line:#a9bde4;--stat-accent:#284b91;}
+.profile-stat-downloads {--stat-bg:#e1f2eb;--stat-line:#9dcbb9;--stat-accent:#23634e;}
+.profile-stat-followers {--stat-bg:#eee8fa;--stat-line:#c2b0e2;--stat-accent:#61428a;}
+.profile-stat-following {--stat-bg:#ffeddf;--stat-line:#dfb899;--stat-accent:#8c4c23;}
+.profile-stat-reputation {--stat-bg:#fbf0cc;--stat-line:#d9c16f;--stat-accent:#785a16;}
+.profile-stat-heading,.profile-stat-action,.profile-stat-icon {color:var(--stat-accent);}
+.profile-stat-icon {background:rgba(255,255,255,.65);border:1px solid var(--stat-line);}
+.profile-stat-action {border-color:var(--stat-line);}
+.profile-stat:hover {transform:translateY(-3px);border-color:var(--stat-accent);box-shadow:0 12px 22px -15px #233b6460;}
+.dark .profile-stat {background:#20293a;border-color:#46536b;--stat-line:#46536b;--stat-accent:#c1d3ff;}
+.dark .profile-stat-icon {background:#2d3a53;}
+.shared-link-approved {background:#e4f3e9;border-color:#97c8a8;color:#183e2c;--status-ink:#22633d;}
+.shared-link-pending {background:#fff0d5;border-color:#d4ae60;color:#513b11;--status-ink:#7c500b;}
+.shared-link-rejected {background:#fce8e5;border-color:#d99a95;color:#632e2a;--status-ink:#9b352d;}
+.shared-link-hidden {background:#eaf0f7;border-color:#afbdce;color:#314358;--status-ink:#425b76;}
+.shared-link-status-label {color:var(--status-ink);}
+.dark .shared-link-approved {background:#183b2b;border-color:#3b7855;color:#e2f5e9;--status-ink:#a0dfb5;}
+.dark .shared-link-pending {background:#41331c;border-color:#8c7039;color:#ffedc8;--status-ink:#f5d28f;}
+.dark .shared-link-rejected {background:#422827;border-color:#8b5450;color:#fce9e7;--status-ink:#f4b5ae;}
+.dark .shared-link-hidden {background:#283348;border-color:#566884;color:#e6edf8;--status-ink:#c5d5eb;}
+@media(prefers-reduced-motion:reduce){.profile-stat:hover{transform:none;}}
