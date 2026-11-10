@@ -17,17 +17,11 @@ EduShare is an educational resource-sharing web application developed as a six-m
 
 
 | Component | Technology |
-
 |---|---|
-
 | Frontend | React, TypeScript, Vite |
-
 | Backend | Java 17, Spring Boot |
-
 | Data Storage | Java File Handling (TXT Files) |
-
 | Version Control | Git and GitHub |
-
 | Development Tools | IntelliJ IDEA, VS Code |
 
 
@@ -41,19 +35,12 @@ This academic project uses Java File Handling instead of MySQL.
 
 
 | Member | Responsibility | GitHub Branch |
-
 |---|---|---|
-
 | Monal | User Management and Integration | `final/user-management` |
-
 | Sandunika | Admin and Category Management | `final/admin-category` |
-
 | Nimesh | Resource Management | `final/resource-management` |
-
 | Lakshitha | Request Management | `final/request-management` |
-
 | Charith | Download and Link Management | `final/download-link` |
-
 | Sanjula | Review and Community Management | `final/review-management` |
 
 
@@ -66,21 +53,21 @@ Each member is responsible for their assigned module, including its Java impleme
 
 
 
-\- User registration, login, and profile management
+- User registration, login, and profile management
 
-\- Student and administrator roles
+- Student and administrator roles
 
-\- Educational resource sharing and searching
+- Educational resource sharing and searching
 
-\- Resource upload, preview, and download
+- Resource upload, preview, and download
 
-\- Resource requests
+- Resource requests
 
-\- Bookmarks and educational links
+- Bookmarks and educational links
 
-\- Reviews and community discussions
+- Reviews and community discussions
 
-\- Notifications and user interactions
+- Notifications and user interactions
 
 
 
@@ -96,25 +83,25 @@ The Java backend demonstrates:
 
 
 
-\- Classes and Objects
+- Classes and Objects
 
-\- Encapsulation
+- Encapsulation
 
-\- Inheritance
+- Inheritance
 
-\- Abstraction
+- Abstraction
 
-\- Polymorphism
+- Polymorphism
 
-\- Aggregation and relationships
+- Aggregation and relationships
 
-\- Collections
+- Collections
 
-\- Exception Handling
+- Exception Handling
 
-\- CRUD Operations
+- CRUD Operations
 
-\- File Handling
+- File Handling
 
 
 
@@ -202,13 +189,13 @@ Actual user records and runtime data are excluded from GitHub through `.gitignor
 
 
 
-\- JDK 17
+- JDK 17
 
-\- Node.js and npm
+- Node.js and npm
 
-\- Git
+- Git
 
-\- IntelliJ IDEA
+- IntelliJ IDEA
 
 
 
@@ -356,21 +343,21 @@ If the branch only exists on GitHub, create a local tracking branch before makin
 
 
 
-\- Do not commit directly to `final-main`.
+- Do not commit directly to `final-main`.
 
-\- Do not overwrite another member's module.
+- Do not overwrite another member's module.
 
-\- Preserve the existing user interface and animations.
+- Preserve the existing user interface and animations.
 
-\- Use Java File Handling for the academic project.
+- Use Java File Handling for the academic project.
 
-\- Coordinate changes to shared files.
+- Coordinate changes to shared files.
 
-\- Do not commit private data or credentials.
+- Do not commit private data or credentials.
 
-\- Review each Pull Request before merging.
+- Review each Pull Request before merging.
 
-\- Preserve individual contributions in Git history.
+- Preserve individual contributions in Git history.
 
 
 
