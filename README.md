@@ -1,10 +1,10 @@
-\# EduShare
+# EduShare
 
-\### E-Resource Sharing System
+### E-Resource Sharing System
 
 
 
-\*\*SE1020 Object-Oriented Programming | Year 1, Semester 2\*\*
+**SE1020 Object-Oriented Programming | Year 1, Semester 2**
 
 
 
@@ -12,7 +12,7 @@ EduShare is an educational resource-sharing web application developed as a six-m
 
 
 
-\## Technologies Used
+## Technologies Used
 
 
 
@@ -36,7 +36,7 @@ This academic project uses Java File Handling instead of MySQL.
 
 
 
-\## Team Members and Modules
+## Team Members and Modules
 
 
 
@@ -62,7 +62,7 @@ Each member is responsible for their assigned module, including its Java impleme
 
 
 
-\## Main Features
+## Main Features
 
 
 
@@ -84,11 +84,11 @@ Each member is responsible for their assigned module, including its Java impleme
 
 
 
-\*\*Project Status:\*\* The application is being integrated module by module. Features must be verified after all required modules are merged.
+**Project Status:** The application is being integrated module by module. Features must be verified after all required modules are merged.
 
 
 
-\## Object-Oriented Programming Concepts
+## Object-Oriented Programming Concepts
 
 
 
@@ -118,7 +118,7 @@ The Java backend demonstrates:
 
 
 
-\## Project Structure
+## Project Structure
 
 
 
@@ -160,7 +160,7 @@ EduShare/
 
 
 
-\## Data Storage
+## Data Storage
 
 
 
@@ -178,7 +178,7 @@ Configuration:
 
 ```properties
 
-edushare.data-dir=${EDUSHARE\_DATA\_DIR:data}
+edushare.data-dir=${EDUSHARE_DATA_DIR:data}
 
 server.port=8080
 
@@ -194,11 +194,11 @@ Actual user records and runtime data are excluded from GitHub through `.gitignor
 
 
 
-\*\*Do not upload private user records, passwords, API keys, or runtime TXT files to GitHub.\*\*
+**Do not upload private user records, passwords, API keys, or runtime TXT files to GitHub.**
 
 
 
-\## Requirements
+## Requirements
 
 
 
@@ -212,11 +212,11 @@ Actual user records and runtime data are excluded from GitHub through `.gitignor
 
 
 
-\## How to Run
+## How to Run
 
 
 
-\### 1. Clone the repository
+### 1. Clone the repository
 
 
 
@@ -230,7 +230,7 @@ cd edushare
 
 
 
-\### 2. Checkout the final project branch
+### 2. Checkout the final project branch
 
 
 
@@ -246,7 +246,7 @@ git pull --ff-only origin final-main
 
 
 
-\### 3. Install frontend dependencies
+### 3. Install frontend dependencies
 
 
 
@@ -258,7 +258,7 @@ npm ci
 
 
 
-\### 4. Build the frontend
+### 4. Build the frontend
 
 
 
@@ -270,11 +270,11 @@ npm run build
 
 
 
-\### 5. Run Spring Boot
+### 5. Run Spring Boot
 
 
 
-Open the project using IntelliJ IDEA and configure \*\*JDK 17\*\*.
+Open the project using IntelliJ IDEA and configure **JDK 17**.
 
 
 
@@ -290,11 +290,11 @@ Default application URL:
 
 
 
-\*\*Note:\*\* The current repository is being assembled progressively. The complete application may not build or run until all team modules are integrated.
+**Note:** The current repository is being assembled progressively. The complete application may not build or run until all team modules are integrated.
 
 
 
-\## GitHub Contribution Workflow
+## GitHub Contribution Workflow
 
 
 
@@ -302,25 +302,25 @@ Each member works on their own branch.
 
 
 
-1\. Clone the repository.
+1. Clone the repository.
 
-2\. Fetch the latest changes from GitHub.
+2. Fetch the latest changes from GitHub.
 
-3\. Switch to the assigned `final/\*` branch.
+3. Switch to the assigned `final/*` branch.
 
-4\. Add or update only the files assigned to that member.
+4. Add or update only the files assigned to that member.
 
-5\. Review changes before staging.
+5. Review changes before staging.
 
-6\. Commit using a meaningful message.
+6. Commit using a meaningful message.
 
-7\. Push to GitHub using the member's own account.
+7. Push to GitHub using the member's own account.
 
-8\. Create a Pull Request targeting `final-main`.
+8. Create a Pull Request targeting `final-main`.
 
-9\. Review and merge the Pull Request.
+9. Review and merge the Pull Request.
 
-10\. Test the integrated application.
+10. Test the integrated application.
 
 
 
@@ -352,7 +352,7 @@ If the branch only exists on GitHub, create a local tracking branch before makin
 
 
 
-\## Team Integration Rules
+## Team Integration Rules
 
 
 
@@ -374,7 +374,7 @@ If the branch only exists on GitHub, create a local tracking branch before makin
 
 
 
-\## Academic Purpose
+## Academic Purpose
 
 
 
