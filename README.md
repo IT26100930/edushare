@@ -1,10 +1,10 @@
-\# EduShare
+# EduShare
 
-\### E-Resource Sharing System
+### E-Resource Sharing System
 
 
 
-\*\*SE1020 Object-Oriented Programming | Year 1, Semester 2\*\*
+**SE1020 Object-Oriented Programming | Year 1, Semester 2**
 
 
 
@@ -12,22 +12,16 @@ EduShare is an educational resource-sharing web application developed as a six-m
 
 
 
-\## Technologies Used
+## Technologies Used
 
 
 
 | Component | Technology |
-
 |---|---|
-
 | Frontend | React, TypeScript, Vite |
-
 | Backend | Java 17, Spring Boot |
-
 | Data Storage | Java File Handling (TXT Files) |
-
 | Version Control | Git and GitHub |
-
 | Development Tools | IntelliJ IDEA, VS Code |
 
 
@@ -36,24 +30,17 @@ This academic project uses Java File Handling instead of MySQL.
 
 
 
-\## Team Members and Modules
+## Team Members and Modules
 
 
 
 | Member | Responsibility | GitHub Branch |
-
 |---|---|---|
-
 | Monal | User Management and Integration | `final/user-management` |
-
 | Sandunika | Admin and Category Management | `final/admin-category` |
-
 | Nimesh | Resource Management | `final/resource-management` |
-
 | Lakshitha | Request Management | `final/request-management` |
-
 | Charith | Download and Link Management | `final/download-link` |
-
 | Sanjula | Review and Community Management | `final/review-management` |
 
 
@@ -62,33 +49,33 @@ Each member is responsible for their assigned module, including its Java impleme
 
 
 
-\## Main Features
+## Main Features
 
 
 
-\- User registration, login, and profile management
+- User registration, login, and profile management
 
-\- Student and administrator roles
+- Student and administrator roles
 
-\- Educational resource sharing and searching
+- Educational resource sharing and searching
 
-\- Resource upload, preview, and download
+- Resource upload, preview, and download
 
-\- Resource requests
+- Resource requests
 
-\- Bookmarks and educational links
+- Bookmarks and educational links
 
-\- Reviews and community discussions
+- Reviews and community discussions
 
-\- Notifications and user interactions
-
-
-
-\*\*Project Status:\*\* The application is being integrated module by module. Features must be verified after all required modules are merged.
+- Notifications and user interactions
 
 
 
-\## Object-Oriented Programming Concepts
+**Project Status:** The application is being integrated module by module. Features must be verified after all required modules are merged.
+
+
+
+## Object-Oriented Programming Concepts
 
 
 
@@ -96,29 +83,29 @@ The Java backend demonstrates:
 
 
 
-\- Classes and Objects
+- Classes and Objects
 
-\- Encapsulation
+- Encapsulation
 
-\- Inheritance
+- Inheritance
 
-\- Abstraction
+- Abstraction
 
-\- Polymorphism
+- Polymorphism
 
-\- Aggregation and relationships
+- Aggregation and relationships
 
-\- Collections
+- Collections
 
-\- Exception Handling
+- Exception Handling
 
-\- CRUD Operations
+- CRUD Operations
 
-\- File Handling
+- File Handling
 
 
 
-\## Project Structure
+## Project Structure
 
 
 
@@ -160,7 +147,7 @@ EduShare/
 
 
 
-\## Data Storage
+## Data Storage
 
 
 
@@ -178,7 +165,7 @@ Configuration:
 
 ```properties
 
-edushare.data-dir=${EDUSHARE\_DATA\_DIR:data}
+edushare.data-dir=${EDUSHARE_DATA_DIR:data}
 
 server.port=8080
 
@@ -194,29 +181,29 @@ Actual user records and runtime data are excluded from GitHub through `.gitignor
 
 
 
-\*\*Do not upload private user records, passwords, API keys, or runtime TXT files to GitHub.\*\*
+**Do not upload private user records, passwords, API keys, or runtime TXT files to GitHub.**
 
 
 
-\## Requirements
+## Requirements
 
 
 
-\- JDK 17
+- JDK 17
 
-\- Node.js and npm
+- Node.js and npm
 
-\- Git
+- Git
 
-\- IntelliJ IDEA
-
-
-
-\## How to Run
+- IntelliJ IDEA
 
 
 
-\### 1. Clone the repository
+## How to Run
+
+
+
+### 1. Clone the repository
 
 
 
@@ -230,7 +217,7 @@ cd edushare
 
 
 
-\### 2. Checkout the final project branch
+### 2. Checkout the final project branch
 
 
 
@@ -246,7 +233,7 @@ git pull --ff-only origin final-main
 
 
 
-\### 3. Install frontend dependencies
+### 3. Install frontend dependencies
 
 
 
@@ -258,7 +245,7 @@ npm ci
 
 
 
-\### 4. Build the frontend
+### 4. Build the frontend
 
 
 
@@ -270,11 +257,11 @@ npm run build
 
 
 
-\### 5. Run Spring Boot
+### 5. Run Spring Boot
 
 
 
-Open the project using IntelliJ IDEA and configure \*\*JDK 17\*\*.
+Open the project using IntelliJ IDEA and configure **JDK 17**.
 
 
 
@@ -290,11 +277,11 @@ Default application URL:
 
 
 
-\*\*Note:\*\* The current repository is being assembled progressively. The complete application may not build or run until all team modules are integrated.
+**Note:** The current repository is being assembled progressively. The complete application may not build or run until all team modules are integrated.
 
 
 
-\## GitHub Contribution Workflow
+## GitHub Contribution Workflow
 
 
 
@@ -302,25 +289,25 @@ Each member works on their own branch.
 
 
 
-1\. Clone the repository.
+1. Clone the repository.
 
-2\. Fetch the latest changes from GitHub.
+2. Fetch the latest changes from GitHub.
 
-3\. Switch to the assigned `final/\*` branch.
+3. Switch to the assigned `final/*` branch.
 
-4\. Add or update only the files assigned to that member.
+4. Add or update only the files assigned to that member.
 
-5\. Review changes before staging.
+5. Review changes before staging.
 
-6\. Commit using a meaningful message.
+6. Commit using a meaningful message.
 
-7\. Push to GitHub using the member's own account.
+7. Push to GitHub using the member's own account.
 
-8\. Create a Pull Request targeting `final-main`.
+8. Create a Pull Request targeting `final-main`.
 
-9\. Review and merge the Pull Request.
+9. Review and merge the Pull Request.
 
-10\. Test the integrated application.
+10. Test the integrated application.
 
 
 
@@ -352,29 +339,29 @@ If the branch only exists on GitHub, create a local tracking branch before makin
 
 
 
-\## Team Integration Rules
+## Team Integration Rules
 
 
 
-\- Do not commit directly to `final-main`.
+- Do not commit directly to `final-main`.
 
-\- Do not overwrite another member's module.
+- Do not overwrite another member's module.
 
-\- Preserve the existing user interface and animations.
+- Preserve the existing user interface and animations.
 
-\- Use Java File Handling for the academic project.
+- Use Java File Handling for the academic project.
 
-\- Coordinate changes to shared files.
+- Coordinate changes to shared files.
 
-\- Do not commit private data or credentials.
+- Do not commit private data or credentials.
 
-\- Review each Pull Request before merging.
+- Review each Pull Request before merging.
 
-\- Preserve individual contributions in Git history.
+- Preserve individual contributions in Git history.
 
 
 
-\## Academic Purpose
+## Academic Purpose
 
 
 
