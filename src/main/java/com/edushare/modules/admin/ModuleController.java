@@ -32,12 +32,20 @@ public class ModuleController {
     }
 
     private boolean admin(HttpSession session) {
-        Object id = session.getAttribute("userId");
-        return id != null
-                && users.byId(Long.parseLong(id.toString()))
-                        .filter(u -> "ADMIN".equals(u.getRole()) && !u.isSuspended())
-                        .isPresent();
+    Object id = session.getAttribute("userId");
+
+    if (id == null) {
+        return false;
     }
+
+    try {
+        return users.byId(Long.parseLong(id.toString()))
+                .filter(u -> "ADMIN".equals(u.getRole()) && !u.isSuspended())
+                .isPresent();
+    } catch (NumberFormatException e) {
+        return false;
+    }
+}
 
     @GetMapping("/api/modules")
     public List<AcademicModule> publicModules() {
