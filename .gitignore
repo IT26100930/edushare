@@ -14,3 +14,9 @@ coverage/
 *.class
 *.jar
 *.zip
+
+# Generated React production files copied for Spring Boot
+/src/main/resources/static/
+
+# Node.js installed by frontend-maven-plugin
+/node/
