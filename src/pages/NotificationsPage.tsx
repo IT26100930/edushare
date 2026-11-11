@@ -1,0 +1,12 @@
+import React,{useEffect,useState} from 'react';
+import {Link} from 'react-router-dom';
+import {Bell, RefreshCw} from 'lucide-react';
+import type {StudentNotice,StudentNoticeFeed} from '../components/NotificationBell.tsx';
+export const NotificationsPage:React.FC=()=>{
+ const [notices,setNotices]=useState<StudentNotice[]>([]),[error,setError]=useState('');
+ const reload=async()=>{try{const r=await fetch('/api/notifications',{credentials:'include',cache:'no-store'});if(!r.ok)throw new Error('Could not retrieve notifications.');const body:StudentNoticeFeed=await r.json();setNotices(body.items);setError('')}catch(e){setError(e instanceof Error?e.message:'Load failed')}};
+ useEffect(()=>{void reload()},[]);
+ const mark=async(item:StudentNotice)=>{await fetch(`/api/notifications/${encodeURIComponent(item.id)}/read`,{method:'POST',credentials:'include'}).catch(()=>{});void reload()};
+ return <main className="max-w-4xl mx-auto px-5 py-10"><div className="flex justify-between items-center gap-2 mb-6"><div><h1 className="text-3xl font-bold">Your Notifications</h1><p className="text-sm text-neutral-500">New requests, resource suggestions, accepted suggestions and other updates.</p></div><button className="rounded-full border px-4 py-2 flex items-center gap-2" onClick={()=>void reload()}><RefreshCw size={15}/>Refresh</button></div>
+ {error&&<p role="alert" className="text-red-600 my-3">{error}</p>}{notices.length===0?<div className="border rounded-2xl p-8 text-center"><Bell className="mx-auto mb-3"/><p>No notifications yet.</p></div>:<div className="space-y-3">{notices.map(n=><article key={n.id} className={`rounded-2xl border p-5 dark:border-neutral-700 ${!n.read?'border-orange-300 bg-orange-50 dark:bg-orange-900/10':''}`}><div className="flex flex-wrap justify-between gap-2"><h2 className="font-bold">{n.title}</h2><span className="text-xs text-neutral-400">{n.createdAt.slice(0,10)}</span></div><p className="text-sm mt-3">{n.message}</p><div className="flex flex-wrap gap-3 items-center mt-4"><Link to={n.url} onClick={()=>void mark(n)} className="rounded-full px-4 py-2 bg-[#FF4A00] text-white text-xs font-bold">{n.kind==='evidence'?'Provide Evidence':n.kind.startsWith('request')?'View Request':n.kind==='followed-resource'?'View Resource':'View Announcement'}</Link>{!n.read&&<button className="text-xs underline" onClick={()=>void mark(n)}>Mark read</button>}</div></article>)}</div>}</main>
+};
