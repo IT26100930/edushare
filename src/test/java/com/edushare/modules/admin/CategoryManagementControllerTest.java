@@ -153,4 +153,63 @@ class CategoryManagementControllerTest {
         assertEquals(204, response.getStatusCode().value());
         assertTrue(categories.findAll().isEmpty());
     }
+    @Test
+    void adminCanReadCategories() {
+        categories.save(new Category(0, "Programming", "IT"));
+
+        ResponseEntity<?> response = controller.findAll(adminSession);
+
+        assertEquals(200, response.getStatusCode().value());
+        assertNotNull(response.getBody());
+        assertEquals(
+            1,
+            ((java.util.List<?>) response.getBody()).size()
+        );
+    }
+    @Test
+    void nonAdminCannotUpdateCategory() {
+        Category category = categories.save(
+            new Category(0, "Programming", "IT")
+        );
+
+        ResponseEntity<?> response = controller.update(
+            category.getId(),
+            new Category(0, "Software Development", null),
+            studentSession
+        );
+
+        assertEquals(403, response.getStatusCode().value());
+        assertEquals(
+            "Programming",
+            categories.findAll().get(0).getName()
+        );
+    }
+    @Test
+    void nonAdminCannotDeleteCategory() {
+        Category category = categories.save(
+            new Category(0, "Programming", "IT")
+        );
+
+        ResponseEntity<?> response = controller.delete(
+            category.getId(),
+            studentSession
+        );
+
+        assertEquals(403, response.getStatusCode().value());
+        assertEquals(1, categories.findAll().size());
+    }
+    @Test
+    void categoryPersistsAfterRepositoryRecreation() {
+        categories.save(new Category(0, "Programming", "IT"));
+
+        TextFileStore newStore = new TextFileStore(dir.toString());
+        CategoryFileRepository newRepository =
+            new CategoryFileRepository(newStore);
+
+        assertEquals(1, newRepository.findAll().size());
+        assertEquals(
+            "Programming",
+            newRepository.findAll().get(0).getName()
+        );
+    }
 }
